@@ -25,9 +25,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://dxenlo.github.io/asset/img/o27yovt6j5pna_365576aba711455898c9b1b41a19e69e.png">
 <meta property="article:published_time" content="2023-05-18T03:40:08.000Z">
-<meta property="article:modified_time" content="2023-05-18T03:58:53.234Z">
+<meta property="article:modified_time" content="2023-05-18T06:20:12.951Z">
 <meta property="article:author" content="Dxenlo">
 <meta property="article:tag" content="java">
+<meta property="article:tag" content="mybatis-plus">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://dxenlo.github.io/asset/img/o27yovt6j5pna_365576aba711455898c9b1b41a19e69e.png">
   
@@ -222,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.6k 字
         
       </span>
     
@@ -233,7 +234,7 @@
         
         
         
-          11 分钟
+          14 分钟
         
       </span>
     
@@ -283,6 +284,8 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">UpdateWrapper&lt;Entity&gt; updateWrapper = <span class="hljs-keyword">new</span> <span class="hljs-title class_">UpdateWrapper</span>&lt;&gt;();<br>updateWrapper.set(<span class="hljs-string">&quot;field&quot;</span>, <span class="hljs-literal">null</span>);<br>updateWrapper.eq(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">this</span>.update(updateWrapper);<br></code></pre></td></tr></table></figure>
 <p>最终我是使用了LambdaUpdateWrapper的类的方法成功更新了，具体代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">updateTemplate</span><span class="hljs-params">(UpdateTemplateRequest request)</span> &#123;<br>    LambdaUpdateWrapper&lt;TemplateDO&gt; lambdaUpdateWrapper = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LambdaUpdateWrapper</span>&lt;&gt;();<br>    lambdaUpdateWrapper.eq(TemplateDO::getTenantId, request.getTenantId());<br>    lambdaUpdateWrapper.set(TemplateDO::getGmtModified, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());<br>    <span class="hljs-comment">// accessKey可能为null</span><br>    lambdaUpdateWrapper.set(TemplateDO::getAccessKey, request.getAccessKey());<br>    <span class="hljs-keyword">if</span> (StringUtils.hasText(request.getName())) &#123;<br>        lambdaUpdateWrapper.set(TemplateDO::getName, request.getName());<br>    &#125;<br>    <span class="hljs-keyword">if</span> (request.getVersion() != <span class="hljs-literal">null</span>) &#123;<br>        lambdaUpdateWrapper.set(TemplateDO::getVersion, request.getVersion());<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.update(lambdaUpdateWrapper);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>不过，除了这个方式之外，也可以直接写sql语句来set空值，但是这种方式不太好维护，因此尽量少使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Update(&quot; update v_game_deploy set &quot;</span><br><span class="hljs-meta">	        + &quot; last_version_id =  null,&quot;</span><br><span class="hljs-meta">	        + &quot; last_version_name =  null,&quot;</span><br><span class="hljs-meta">	        + &quot; last_version_deploy_state =  null,&quot;</span><br><span class="hljs-meta">			+ &quot; game_adapt_state = 1&quot;</span><br><span class="hljs-meta">	        + &quot; where last_version_id =  #&#123;deploy.lastVersionId&#125;&quot;)</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">updateLastVersionNull</span><span class="hljs-params">(<span class="hljs-meta">@Param(&quot;deploy&quot;)</span> ViewGameDeployDO viewGameDeployDO)</span>;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -316,6 +319,8 @@
       <i class="iconfont icon-tags"></i>
       
         <a href="/tags/java/">#java</a>
+      
+        <a href="/tags/mybatis-plus/">#mybatis-plus</a>
       
     </div>
   
