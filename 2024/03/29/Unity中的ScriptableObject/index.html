@@ -16,25 +16,23 @@
   <meta name="author" content="Dxenlo">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问题描述在日常的业务开发中，时常会遇到将字段值设置为null的情形。而由于mybatis plus的配置，大多数时候都会默认忽略掉null值。因此记录一下解决这个问题的方案。 环境mybatis plus的版本&lt;mybatis-plus.version&gt;3.4.1&lt;&#x2F;mybatis-plus.version&gt;Javajava version &quot;1.8.0_291&amp;">
+    <meta name="description" content="背景最近学习Unity，对其中的ScriptableObject比较好奇，查了一些资料总结了一下，记录下来以便查阅。 ScriptableObject是什么ScriptableObject，以下简称SO，是在Unity中的一种数据存储和管理的方式。SO不挂载在GameObject上，是作为Asset保存在项目中的。 简单的类比，SO就像是数据库。首先创建的C#脚本，继承ScriptableObje">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mybatis plus设置字段为空的问题">
-<meta property="og:url" content="http://dxenlo.github.io/2023/05/18/mybatis-plus%E8%AE%BE%E7%BD%AE%E5%AD%97%E6%AE%B5%E4%B8%BA%E7%A9%BA%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="Unity中的ScriptableObject">
+<meta property="og:url" content="http://dxenlo.github.io/2024/03/29/Unity%E4%B8%AD%E7%9A%84ScriptableObject/index.html">
 <meta property="og:site_name" content="MyBlog">
-<meta property="og:description" content="问题描述在日常的业务开发中，时常会遇到将字段值设置为null的情形。而由于mybatis plus的配置，大多数时候都会默认忽略掉null值。因此记录一下解决这个问题的方案。 环境mybatis plus的版本&lt;mybatis-plus.version&gt;3.4.1&lt;&#x2F;mybatis-plus.version&gt;Javajava version &quot;1.8.0_291&amp;">
+<meta property="og:description" content="背景最近学习Unity，对其中的ScriptableObject比较好奇，查了一些资料总结了一下，记录下来以便查阅。 ScriptableObject是什么ScriptableObject，以下简称SO，是在Unity中的一种数据存储和管理的方式。SO不挂载在GameObject上，是作为Asset保存在项目中的。 简单的类比，SO就像是数据库。首先创建的C#脚本，继承ScriptableObje">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://dxenlo.github.io/asset/img/o27yovt6j5pna_365576aba711455898c9b1b41a19e69e.png">
-<meta property="article:published_time" content="2023-05-18T03:40:08.000Z">
-<meta property="article:modified_time" content="2023-05-18T06:29:46.105Z">
+<meta property="article:published_time" content="2024-03-29T06:59:26.000Z">
+<meta property="article:modified_time" content="2024-03-29T07:39:50.558Z">
 <meta property="article:author" content="Dxenlo">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="Mybatis-plus">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="ScriptObject">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://dxenlo.github.io/asset/img/o27yovt6j5pna_365576aba711455898c9b1b41a19e69e.png">
   
   
   
-  <title>mybatis plus设置字段为空的问题 - MyBlog</title>
+  <title>Unity中的ScriptableObject - MyBlog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="mybatis plus设置字段为空的问题"></span>
+            <span id="subtitle" data-typed-text="Unity中的ScriptableObject"></span>
           
         </div>
 
@@ -211,8 +209,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-18 11:40" pubdate>
-          2023年5月18日 中午
+        <time datetime="2024-03-29 14:59" pubdate>
+          2024年3月29日 下午
         </time>
       </span>
     
@@ -223,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.1k 字
         
       </span>
     
@@ -234,7 +232,7 @@
         
         
         
-          14 分钟
+          10 分钟
         
       </span>
     
@@ -272,20 +270,24 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">mybatis plus设置字段为空的问题</h1>
+            <h1 style="display: none">Unity中的ScriptableObject</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在日常的业务开发中，时常会遇到将字段值设置为null的情形。而由于mybatis plus的配置，大多数时候都会默认忽略掉null值。因此记录一下解决这个问题的方案。</p>
-<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>mybatis plus的版本<br><code>&lt;mybatis-plus.version&gt;3.4.1&lt;/mybatis-plus.version&gt;</code><br>Java<br><code>java version &quot;1.8.0_291&quot;</code></p>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>查看mybatis plus官网的解决方案<br><img src="/asset/img/o27yovt6j5pna_365576aba711455898c9b1b41a19e69e.png" srcset="/img/loading.gif" lazyload alt="这是图片" title="官网说明"></p>
-<p>实际上，方式一和方式二都不太推荐。因为很容易在其他代码中不小心将值设置为null。毕竟大多数情况下我们都很难记得去复写这个值，更何况有些业务场景下，我们甚至拿不到或者无需关心相应的值。<br>网上也有相关的文档推荐使用如下的方法，但在我的代码里测试时仍然不能修改值为null</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">UpdateWrapper&lt;Entity&gt; updateWrapper = <span class="hljs-keyword">new</span> <span class="hljs-title class_">UpdateWrapper</span>&lt;&gt;();<br>updateWrapper.set(<span class="hljs-string">&quot;field&quot;</span>, <span class="hljs-literal">null</span>);<br>updateWrapper.eq(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-number">2</span>)<br><span class="hljs-built_in">this</span>.update(updateWrapper);<br></code></pre></td></tr></table></figure>
-<p>最终我是使用了LambdaUpdateWrapper的类的方法成功更新了，具体代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">updateTemplate</span><span class="hljs-params">(UpdateTemplateRequest request)</span> &#123;<br>    LambdaUpdateWrapper&lt;TemplateDO&gt; lambdaUpdateWrapper = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LambdaUpdateWrapper</span>&lt;&gt;();<br>    lambdaUpdateWrapper.eq(TemplateDO::getTenantId, request.getTenantId());<br>    lambdaUpdateWrapper.set(TemplateDO::getGmtModified, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());<br>    <span class="hljs-comment">// accessKey可能为null</span><br>    lambdaUpdateWrapper.set(TemplateDO::getAccessKey, request.getAccessKey());<br>    <span class="hljs-keyword">if</span> (StringUtils.hasText(request.getName())) &#123;<br>        lambdaUpdateWrapper.set(TemplateDO::getName, request.getName());<br>    &#125;<br>    <span class="hljs-keyword">if</span> (request.getVersion() != <span class="hljs-literal">null</span>) &#123;<br>        lambdaUpdateWrapper.set(TemplateDO::getVersion, request.getVersion());<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.update(lambdaUpdateWrapper);<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>不过，除了这个方式之外，也可以直接写sql语句来set空值，但是这种方式不太好维护，因此尽量少使用。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Update(&quot; update v_game_deploy set &quot;</span><br><span class="hljs-meta">	        + &quot; last_version_id =  null,&quot;</span><br><span class="hljs-meta">	        + &quot; last_version_name =  null,&quot;</span><br><span class="hljs-meta">	        + &quot; last_version_deploy_state =  null,&quot;</span><br><span class="hljs-meta">			+ &quot; game_adapt_state = 1&quot;</span><br><span class="hljs-meta">	        + &quot; where last_version_id =  #&#123;deploy.lastVersionId&#125;&quot;)</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">updateLastVersionNull</span><span class="hljs-params">(<span class="hljs-meta">@Param(&quot;deploy&quot;)</span> ViewGameDeployDO viewGameDeployDO)</span>;<br></code></pre></td></tr></table></figure>
+                <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近学习Unity，对其中的ScriptableObject比较好奇，查了一些资料总结了一下，记录下来以便查阅。</p>
+<h1 id="ScriptableObject是什么"><a href="#ScriptableObject是什么" class="headerlink" title="ScriptableObject是什么"></a>ScriptableObject是什么</h1><p>ScriptableObject，以下简称SO，是在Unity中的一种数据存储和管理的方式。<br>SO不挂载在GameObject上，是作为Asset保存在项目中的。</p>
+<p>简单的类比，SO就像是数据库。<br>首先创建的C#脚本，继承ScriptableObject类。这个C#脚本定义着一些变量或者是函数。这个就类似于数据库的一张表。<br>比如我们要保存武器，新建一个WeaponSO，定义诸如name、damage、icon这些变量。好比数据库的各个字段。<br>然后在Unity编辑器中按照这个WeaponSO模版新建一个个SO实例，比如刀、剑、棒槌等等，不同的武器的每个变量值都不一样。就好比数据库的每一行数据。</p>
+<p>与数据库不同的是，我们通常将需要读写的数据存入数据库。而SO我们通常只保存那些只读不写的数据。<br>通俗地说，当我们定义了一个武器，比如棒槌，我们会在游戏设计阶段就定义好它的各项数值，而在游戏正常游玩过程中，我们不会去改变这些值。那边这个数据就可以用SO来保存。</p>
+<h1 id="代码样例"><a href="#代码样例" class="headerlink" title="代码样例"></a>代码样例</h1><h2 id="C-模版脚本"><a href="#C-模版脚本" class="headerlink" title="C# 模版脚本"></a>C# 模版脚本</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">using</span> UnityEngine;<br><br><span class="hljs-comment">// Create a new ScriptableObject class</span><br><br>[<span class="hljs-meta">CreateAssetMenu(fileName = <span class="hljs-string">&quot;NewWeapon&quot;</span>, menuName = <span class="hljs-string">&quot;Game/Weapon&quot;</span>)</span>]<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">WeaponScriptableObject</span> : <span class="hljs-title">ScriptableObject</span><br>&#123;<br> <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> weaponName;<br> <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> damage;<br> <span class="hljs-keyword">public</span> Sprite icon;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="使用ScriptbaleObject保存可读写数据"><a href="#使用ScriptbaleObject保存可读写数据" class="headerlink" title="使用ScriptbaleObject保存可读写数据"></a>使用ScriptbaleObject保存可读写数据</h2><p>有的时候，我们可能希望使用SO保存数据，但又希望能够在某些时间去修改它。<br>此时我们可以使用自定义类来保存这个需要修改的数据，然后在SO中存储这个自定义类的引用。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerXP</span> &#123;<br> <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> XP = <span class="hljs-number">100</span>;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerData</span> : <span class="hljs-title">ScriptableObject</span> &#123;<br> <span class="hljs-keyword">public</span> PlayerXP PlayerXP;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@sonusprocks/how-to-harness-the-power-of-scriptable-objects-in-unity-dc0699c55b21">https://medium.com/@sonusprocks/how-to-harness-the-power-of-scriptable-objects-in-unity-dc0699c55b21</a></li>
+</ol>
+
                 
               </div>
             
@@ -293,34 +295,13 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/bug%E8%AE%B0%E5%BD%95/" class="category-chain-item">bug记录</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Java/">#Java</a>
+        <a href="/tags/Unity/">#Unity</a>
       
-        <a href="/tags/Mybatis-plus/">#Mybatis-plus</a>
+        <a href="/tags/ScriptObject/">#ScriptObject</a>
       
     </div>
   
@@ -332,8 +313,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>mybatis plus设置字段为空的问题</div>
-      <div>http://dxenlo.github.io/2023/05/18/mybatis-plus设置字段为空的问题/</div>
+      <div>Unity中的ScriptableObject</div>
+      <div>http://dxenlo.github.io/2024/03/29/Unity中的ScriptableObject/</div>
     </div>
     <div class="license-meta">
       
@@ -345,7 +326,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月18日</div>
+          <div>2024年3月29日</div>
         </div>
       
       
@@ -377,18 +358,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/17/%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%85%A5%E7%B3%BB%E7%BB%9F/" title="统一接入系统">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">统一接入系统</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/07/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2023/07/05/Rust%E5%92%8C%E5%8C%BA%E5%9D%97%E9%93%BE/" title="Rust和区块链">
+                        <span class="hidden-mobile">Rust和区块链</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

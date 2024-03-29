@@ -4,6 +4,65 @@
   
   
   <entry>
+    <title>Unity中的ScriptableObject</title>
+    <link href="/2024/03/29/Unity%E4%B8%AD%E7%9A%84ScriptableObject/"/>
+    <url>/2024/03/29/Unity%E4%B8%AD%E7%9A%84ScriptableObject/</url>
+    
+    <content type="html"><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近学习Unity，对其中的ScriptableObject比较好奇，查了一些资料总结了一下，记录下来以便查阅。</p><h1 id="ScriptableObject是什么"><a href="#ScriptableObject是什么" class="headerlink" title="ScriptableObject是什么"></a>ScriptableObject是什么</h1><p>ScriptableObject，以下简称SO，是在Unity中的一种数据存储和管理的方式。<br>SO不挂载在GameObject上，是作为Asset保存在项目中的。</p><p>简单的类比，SO就像是数据库。<br>首先创建的C#脚本，继承ScriptableObject类。这个C#脚本定义着一些变量或者是函数。这个就类似于数据库的一张表。<br>比如我们要保存武器，新建一个WeaponSO，定义诸如name、damage、icon这些变量。好比数据库的各个字段。<br>然后在Unity编辑器中按照这个WeaponSO模版新建一个个SO实例，比如刀、剑、棒槌等等，不同的武器的每个变量值都不一样。就好比数据库的每一行数据。</p><p>与数据库不同的是，我们通常将需要读写的数据存入数据库。而SO我们通常只保存那些只读不写的数据。<br>通俗地说，当我们定义了一个武器，比如棒槌，我们会在游戏设计阶段就定义好它的各项数值，而在游戏正常游玩过程中，我们不会去改变这些值。那边这个数据就可以用SO来保存。</p><h1 id="代码样例"><a href="#代码样例" class="headerlink" title="代码样例"></a>代码样例</h1><h2 id="C-模版脚本"><a href="#C-模版脚本" class="headerlink" title="C# 模版脚本"></a>C# 模版脚本</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">using</span> UnityEngine;<br><br><span class="hljs-comment">// Create a new ScriptableObject class</span><br><br>[<span class="hljs-meta">CreateAssetMenu(fileName = <span class="hljs-string">&quot;NewWeapon&quot;</span>, menuName = <span class="hljs-string">&quot;Game/Weapon&quot;</span>)</span>]<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">WeaponScriptableObject</span> : <span class="hljs-title">ScriptableObject</span><br>&#123;<br> <span class="hljs-keyword">public</span> <span class="hljs-built_in">string</span> weaponName;<br> <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> damage;<br> <span class="hljs-keyword">public</span> Sprite icon;<br>&#125;<br></code></pre></td></tr></table></figure><h2 id="使用ScriptbaleObject保存可读写数据"><a href="#使用ScriptbaleObject保存可读写数据" class="headerlink" title="使用ScriptbaleObject保存可读写数据"></a>使用ScriptbaleObject保存可读写数据</h2><p>有的时候，我们可能希望使用SO保存数据，但又希望能够在某些时间去修改它。<br>此时我们可以使用自定义类来保存这个需要修改的数据，然后在SO中存储这个自定义类的引用。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerXP</span> &#123;<br> <span class="hljs-keyword">public</span> <span class="hljs-built_in">int</span> XP = <span class="hljs-number">100</span>;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">PlayerData</span> : <span class="hljs-title">ScriptableObject</span> &#123;<br> <span class="hljs-keyword">public</span> PlayerXP PlayerXP;<br>&#125;<br></code></pre></td></tr></table></figure><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol><li><a href="https://medium.com/@sonusprocks/how-to-harness-the-power-of-scriptable-objects-in-unity-dc0699c55b21">https://medium.com/@sonusprocks/how-to-harness-the-power-of-scriptable-objects-in-unity-dc0699c55b21</a></li></ol>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Unity</tag>
+      
+      <tag>ScriptObject</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Rust和区块链</title>
+    <link href="/2023/07/05/Rust%E5%92%8C%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    <url>/2023/07/05/Rust%E5%92%8C%E5%8C%BA%E5%9D%97%E9%93%BE/</url>
+    
+    <content type="html"><![CDATA[<h1 id="区块链"><a href="#区块链" class="headerlink" title="区块链"></a>区块链</h1><h2 id="区块链是什么"><a href="#区块链是什么" class="headerlink" title="区块链是什么"></a>区块链是什么</h2><p>“区块链”的概念是中本聪在2008年发表的论文中首先提出的。区块链技术提出的本质原因，是为解决在无第三方信任机构背书的情况下如何保障交易正确性的问题。<br>当我们使用现金进行交易，现金所代表的价值是由国家背书；当我们使用银行卡交易，同样也是因为银行卡余额的价值也是由银行，更进一步而言也是国家背书。<br>在有可信任金融机构的情况下，如果双方要进行一次交易，实际上只需要在机构中对两个用户的余额进行原子性的加减操作即可。但是在区块链中，没有一个这样的信任机构记录用户的余额，以及金钱的转移。</p><h2 id="区块链怎么做的"><a href="#区块链怎么做的" class="headerlink" title="区块链怎么做的"></a>区块链怎么做的</h2><p>区块链技术依据非对称加密、数字签名、P2P网络等技术，建立起一个个区块所构成的链表，从而保障数据的安全行和不可篡改性。</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Rust</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>统一接入系统</title>
+    <link href="/2023/06/17/%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%85%A5%E7%B3%BB%E7%BB%9F/"/>
+    <url>/2023/06/17/%E7%BB%9F%E4%B8%80%E6%8E%A5%E5%85%A5%E7%B3%BB%E7%BB%9F/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Java</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>mybatis plus设置字段为空的问题</title>
     <link href="/2023/05/18/mybatis-plus%E8%AE%BE%E7%BD%AE%E5%AD%97%E6%AE%B5%E4%B8%BA%E7%A9%BA%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <url>/2023/05/18/mybatis-plus%E8%AE%BE%E7%BD%AE%E5%AD%97%E6%AE%B5%E4%B8%BA%E7%A9%BA%E7%9A%84%E9%97%AE%E9%A2%98/</url>
